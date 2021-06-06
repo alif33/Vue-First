@@ -1,13 +1,25 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <div id="loading" v-if="loading">
+      <img src="/static/image/loading.gif">
+    </div>
     <router-view/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data() {
+    return {
+      loading: false
+    }
+  },
+  created(){
+    this.$eventBus.$on('loadingStatus', payload=>{
+        this.loading = payload;
+    })
+  }
 }
 </script>
 
